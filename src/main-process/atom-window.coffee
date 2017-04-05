@@ -24,19 +24,24 @@ class AtomWindow
     @closedPromise = new Promise((@resolveClosedPromise) =>)
 
     options =
+      frame: true
+      transparent: true
       show: false
       title: 'Atom'
       # Add an opaque backgroundColor (instead of keeping the default
       # transparent one) to prevent subpixel anti-aliasing from being disabled.
       # We believe this is a regression introduced with Electron 0.37.3, and
       # thus we should remove this as soon as a fix gets released.
-      backgroundColor: "#fff"
+      #backgroundColor: "#fff"
       webPreferences:
+        direct-write: true
+        subpixel-font-scaling: true
         # Prevent specs from throttling when the window is in the background:
         # this should result in faster CI builds, and an improvement in the
         # local development experience when running specs through the UI (which
         # now won't pause when e.g. minimizing the window).
         backgroundThrottling: not @isSpec
+        
 
     # Don't set icon on Windows so the exe's ico will be used as window and
     # taskbar's icon. See https://github.com/atom/atom/issues/4811 for more.
